@@ -59,5 +59,17 @@ namespace Vidly.Controllers
         {
             return Content(year + "/" + month);
         }
+
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies.Include(m=>m.Genre).FirstOrDefault(m=>m.Id==id);
+
+            if (movie==null)
+            {
+                return HttpNotFound();
+            }
+            return View(movie);
+
+        }
     }
 }
