@@ -1,0 +1,38 @@
+﻿@model Vidly.ViewModels.CustomersViewModel
+@{
+    ViewBag.Title = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container">
+    <h2>Customers</h2>
+    
+    @if (Model.Customers.Count == 0)
+    {
+        <p>Currently we dont have any customers</p>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    for (int i = 0; i < Model.Customers.Count; i++)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(Model.Customers[i].Name, "Details", new { id = i + 1 }, null)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+                    }
+</div>
