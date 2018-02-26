@@ -20,6 +20,7 @@
             <thead>
                 <tr>
                     <th>Firstname</th>
+                    <th>Discount Rate</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                     {
                         <tr>
                             <td>@Html.ActionLink(Model[i].Name, "Details", new { id = Model[i].Id }, null)</td>
+                            <td>@Model[i].MembershipType.DiscountRate%</td>
                         </tr>
                     }
                 }
