@@ -14,6 +14,7 @@ namespace Vidly.Migrations
 
         protected override void Seed(Vidly.Models.ApplicationDbContext context)
         {
+            
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
