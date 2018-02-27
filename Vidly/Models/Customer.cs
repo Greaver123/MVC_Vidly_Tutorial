@@ -13,12 +13,17 @@ namespace Vidly.Models
         [Required]
         [StringLength(255)]
         public string Name { get; set; }
+
         public bool IsSubscribedToNewsleter { get; set; }
+
+        [Display(Name ="Membership Type")]
         public MembershipType MembershipType { get; set; }
+
         public byte MembershipTypeId { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Display(Name="Date of Birth")]
         public Nullable<DateTime> Birthdate { get; set; }
 
     }
