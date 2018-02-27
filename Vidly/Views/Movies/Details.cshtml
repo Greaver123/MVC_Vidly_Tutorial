@@ -1,0 +1,17 @@
+﻿@using System.Globalization;
+
+@model Vidly.Models.Movie
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+<ul>
+    <li>Genre: @Model.Genre.Name</li>
+    <li>Release Date: @Model.ReleaseDate.Date.DayOfWeek, @CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(Model.ReleaseDate.Date.Month) @Model.ReleaseDate.Day, @Model.ReleaseDate.Date.Year</li>
+    <li>Date Added: @Model.DateAdded.Date.DayOfWeek, @CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(Model.DateAdded.Date.Month) @Model.DateAdded.Day, @Model.DateAdded.Date.Year</li>
+    <li>Number in Stock: @Model.NumberInStock</li>
+</ul>
+
