@@ -23,6 +23,8 @@ namespace Vidly.Models
 
         [Display(Name="Number in stock")]
         public long NumberInStock { get; set; }
+
+        public byte GenreId { get; set; } // Dodane tylko dla optymalizacji, aby nie musieś robić include Genre?
     }
 
 }
