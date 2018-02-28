@@ -54,9 +54,12 @@ namespace Vidly.Controllers
 
         }
 
-        public ActionResult New()
+        public ActionResult New(int? id)
         {
-            var movieFormModel = new MovieFormModel() { Genres = GetGenres() };
+            var movie = _context.Movies.Find(id);
+
+            
+            var movieFormModel = new MovieFormModel() {Movie=movie, Genres = GetGenres() };
 
             return View(movieFormModel);
         }
