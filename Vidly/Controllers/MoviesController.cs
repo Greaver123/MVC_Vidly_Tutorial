@@ -21,24 +21,6 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        // GET: Movies
-        public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek!" };
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Customer 1" },
-                new Customer {Name = "Customer 2" }
-            };
-
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
-
-            return View(viewModel);
-        }
 
         public ActionResult Index()
         {
@@ -81,7 +63,11 @@ namespace Vidly.Controllers
 
         public ActionResult Save(Movie movie)
         {
+             movie.DateAdded = DateTime.Now;
+            movie.Genre = GetGenres().Find(g => g.Id == movie.GenreId);
+
             _context.Movies.Add(movie);
+            
 
             _context.SaveChanges();
 
@@ -92,7 +78,7 @@ namespace Vidly.Controllers
 
         private List<Genre> GetGenres()
         {
-            return _context.Genres.ToList() ;
+            return _context.Genres.Distinct().ToList() ;
         }
     }
 }
