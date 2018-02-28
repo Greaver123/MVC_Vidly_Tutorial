@@ -66,10 +66,26 @@ namespace Vidly.Controllers
 
         public ActionResult Save(Movie movie)
         {
-             movie.DateAdded = DateTime.Now;
-            movie.Genre = GetGenres().Find(g => g.Id == movie.GenreId);
+            var movieGenre= GetGenres().Find(g => g.Id == movie.GenreId);
 
-            _context.Movies.Add(movie);
+            if (movie.Id==0)
+            {
+                movie.DateAdded = DateTime.Now;
+                movie.Genre = movieGenre;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieModel = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieModel.Name = movie.Name;
+                movieModel.Genre = movieGenre;
+                movieModel.NumberInStock = movie.NumberInStock;
+                movieModel.DateAdded = DateTime.Now;
+                movieModel.ReleaseDate = movie.ReleaseDate;
+                movieModel.GenreId =movie.GenreId;
+
+            }
             
 
             _context.SaveChanges();
@@ -77,7 +93,6 @@ namespace Vidly.Controllers
 
             return RedirectToAction("Index");
         }
-
 
         private List<Genre> GetGenres()
         {
