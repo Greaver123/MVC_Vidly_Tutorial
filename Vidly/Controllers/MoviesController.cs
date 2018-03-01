@@ -58,7 +58,15 @@ namespace Vidly.Controllers
         {
             var movie = _context.Movies.Find(id);
 
-            
+            if (movie == null)
+            {
+                ViewBag.Header = "New Movie";
+            }
+            else
+            {
+                ViewBag.Header = "Edit Movie";
+            }
+                     
             var movieFormModel = new MovieFormModel() {Movie=movie, Genres = GetGenres() };
 
             return View(movieFormModel);
