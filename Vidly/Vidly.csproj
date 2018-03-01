@@ -233,9 +233,9 @@
     <Compile Include="Migrations\201802261735073_AddedBirthdayPropToCustomer.Designer.cs">
       <DependentUpon>201802261735073_AddedBirthdayPropToCustomer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802261951272_MoviesAndGenres.cs" />
-    <Compile Include="Migrations\201802261951272_MoviesAndGenres.Designer.cs">
-      <DependentUpon>201802261951272_MoviesAndGenres.cs</DependentUpon>
+    <Compile Include="Migrations\201802281634303_AddedGenreAndMovies.cs" />
+    <Compile Include="Migrations\201802281634303_AddedGenreAndMovies.Designer.cs">
+      <DependentUpon>201802281634303_AddedGenreAndMovies.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -248,6 +248,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CustomersViewModel.cs" />
+    <Compile Include="ViewModels\MovieFormModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\NewCustomerViewModel.cs" />
     <Compile Include="ViewModels\RandomMovieViewModel.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Movies\Index.cshtml" />
     <Content Include="Views\Movies\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Movies\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,8 +355,8 @@
     <EmbeddedResource Include="Migrations\201802261735073_AddedBirthdayPropToCustomer.resx">
       <DependentUpon>201802261735073_AddedBirthdayPropToCustomer.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802261951272_MoviesAndGenres.resx">
-      <DependentUpon>201802261951272_MoviesAndGenres.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802281634303_AddedGenreAndMovies.resx">
+      <DependentUpon>201802281634303_AddedGenreAndMovies.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

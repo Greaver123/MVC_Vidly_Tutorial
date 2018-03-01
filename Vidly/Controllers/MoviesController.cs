@@ -21,24 +21,6 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        // GET: Movies
-        public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek!" };
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Customer 1" },
-                new Customer {Name = "Customer 2" }
-            };
-
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
-
-            return View(viewModel);
-        }
 
         public ActionResult Index()
         {
@@ -70,6 +52,59 @@ namespace Vidly.Controllers
             }
             return View(movie);
 
+        }
+
+        public ActionResult New(int? id)
+        {
+            var movie = _context.Movies.Find(id);
+
+            if (movie == null)
+            {
+                ViewBag.Header = "New Movie";
+            }
+            else
+            {
+                ViewBag.Header = "Edit Movie";
+            }
+                     
+            var movieFormModel = new MovieFormModel() {Movie=movie, Genres = GetGenres() };
+
+            return View(movieFormModel);
+        }
+
+        public ActionResult Save(Movie movie)
+        {
+            var movieGenre= GetGenres().Find(g => g.Id == movie.GenreId);
+
+            if (movie.Id==0)
+            {
+                movie.DateAdded = DateTime.Now;
+                movie.Genre = movieGenre;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieModel = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieModel.Name = movie.Name;
+                movieModel.Genre = movieGenre;
+                movieModel.NumberInStock = movie.NumberInStock;
+                movieModel.DateAdded = DateTime.Now;
+                movieModel.ReleaseDate = movie.ReleaseDate;
+                movieModel.GenreId =movie.GenreId;
+
+            }
+            
+
+            _context.SaveChanges();
+
+
+            return RedirectToAction("Index");
+        }
+
+        private List<Genre> GetGenres()
+        {
+            return _context.Genres.Distinct().ToList() ;
         }
     }
 }

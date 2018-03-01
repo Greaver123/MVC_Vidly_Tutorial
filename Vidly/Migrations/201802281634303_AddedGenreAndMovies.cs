@@ -3,7 +3,7 @@ namespace Vidly.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class MoviesAndGenres : DbMigration
+    public partial class AddedGenreAndMovies : DbMigration
     {
         public override void Up()
         {
@@ -22,6 +22,7 @@ namespace Vidly.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        GenreId = c.Byte(nullable: false),
                         ReleaseDate = c.DateTime(nullable: false),
                         DateAdded = c.DateTime(nullable: false),
                         NumberInStock = c.Long(nullable: false),
