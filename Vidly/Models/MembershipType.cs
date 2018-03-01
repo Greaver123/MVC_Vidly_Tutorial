@@ -13,6 +13,17 @@ namespace Vidly.Models
         public byte DiscountRate { get; set; }
         public string Name { get; set; }
 
+        public static readonly Byte Unknown = 0;
+        public static readonly Byte PayAsYouGo = 1;
+    }
+
+    enum Membership
+    {
+        Unknown = 0,
+        PayAsYouGo,
+        Weekly,
+        Monthly,
+        Quarterly
 
     }
 }
