@@ -54,7 +54,6 @@ namespace Vidly.Controllers
             {
                 Customer= new Customer(),
                 MembershipTypes = membershipTypes
-
             };
 
             return View("CustomerForm",viewModel);

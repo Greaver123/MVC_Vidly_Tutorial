@@ -56,14 +56,16 @@ namespace Vidly.Controllers
 
         public ActionResult New(int? id)
         {
-            var movie = _context.Movies.Find(id);
+            Movie movie = null;
 
-            if (movie == null)
+            if (id == null)
             {
+                movie = new Movie();
                 ViewBag.Header = "New Movie";
             }
             else
             {
+                movie = _context.Movies.Find(id);
                 ViewBag.Header = "Edit Movie";
             }
                      
@@ -71,9 +73,15 @@ namespace Vidly.Controllers
 
             return View(movieFormModel);
         }
-
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new MovieFormModel() { Genres = GetGenres(), Movie = new Movie() };
+                return View("New", viewModel);
+
+            }
             var movieGenre= GetGenres().Find(g => g.Id == movie.GenreId);
 
             if (movie.Id==0)
