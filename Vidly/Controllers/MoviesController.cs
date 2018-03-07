@@ -56,29 +56,30 @@ namespace Vidly.Controllers
 
         public ActionResult New(int? id)
         {
-            Movie movie = null;
+        
+            MovieFormModel movieModel = null;
 
             if (id == null)
             {
-                movie = new Movie();
+                movieModel = new MovieFormModel() { Genres = GetGenres() };
                 ViewBag.Header = "New Movie";
             }
             else
             {
-                movie = _context.Movies.Find(id);
+                Movie movie = _context.Movies.Find(id);
+                movieModel = new MovieFormModel(movie) { Genres = GetGenres() };
                 ViewBag.Header = "Edit Movie";
             }
                      
-            var movieFormModel = new MovieFormModel() {Movie=movie, Genres = GetGenres() };
 
-            return View(movieFormModel);
+            return View(movieModel);
         }
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
             if (!ModelState.IsValid)
             {
-                var viewModel = new MovieFormModel() { Genres = GetGenres(), Movie = new Movie() };
+                var viewModel = new MovieFormModel(movie) { Genres = GetGenres() };
                 return View("New", viewModel);
 
             }
@@ -99,11 +100,9 @@ namespace Vidly.Controllers
                 movieModel.NumberInStock = movie.NumberInStock;
                 movieModel.DateAdded = DateTime.Now;
                 movieModel.ReleaseDate = movie.ReleaseDate;
-                movieModel.GenreId =movie.GenreId;
-
+                movieModel.GenreId = movie.GenreId;
             }
-            
-
+           
             _context.SaveChanges();
 
 
